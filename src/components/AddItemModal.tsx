@@ -17,12 +17,7 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
     title: "",
     type: "movie" as "movie" | "book",
     category: "Action",
-   
-
-    director: "",
     description: "",
-    imageUrl:
-      "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=400&fit=crop",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,19 +28,15 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
       title: formData.title,
       type: formData.type,
       category: formData.category,
-      director: formData.type === "movie" ? formData.director : undefined,
       description: formData.description,
-      imageUrl: formData.imageUrl,
+      imageUrl: ""
     });
 
     setFormData({
       title: "",
       type: "movie",
       category: "Action",
-      director: "",
       description: "",
-      imageUrl:
-        "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=300&h=400&fit=crop",
     });
 
     onClose();
@@ -80,7 +71,7 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl  bg-gray-50 text-gray-900 placeholder-gray-400 
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-400 
                 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
               placeholder="Enter title..."
             />
@@ -93,9 +84,12 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
             <select
               value={formData.type}
               onChange={(e) =>
-                setFormData({ ...formData, type: e.target.value as "movie" | "book" })
+                setFormData({
+                  ...formData,
+                  type: e.target.value as "movie" | "book",
+                })
               }
-              className="w-full px-4 py-3 rounded-xl  bg-gray-50 text-gray-900 
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 
                 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
             >
               <option value="movie">Movie</option>
@@ -105,14 +99,14 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Category
+              Genre
             </label>
             <select
               value={formData.category}
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl  bg-gray-50 text-gray-900 
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 
                 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
             >
               {CATEGORIES.map((category) => (
@@ -123,8 +117,6 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
             </select>
           </div>
 
-          
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Description
@@ -134,7 +126,7 @@ export const AddItemModal: React.FC<AddItemModalProps> = ({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl  bg-gray-50 text-gray-900 placeholder-gray-400 
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-400 
                 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all resize-none"
               rows={3}
               placeholder="Brief description..."
